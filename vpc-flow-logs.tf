@@ -36,7 +36,6 @@ resource "aws_cloudwatch_log_group" "flow_log" {
   retention_in_days = var.flow_log_cloudwatch_log_group_retention_in_days
   kms_key_id        = var.flow_log_cloudwatch_log_group_kms_key_id
 
-  tags = merge(var.tags, var.vpc_flow_log_tags)
 }
 
 #########################
@@ -48,7 +47,6 @@ resource "aws_iam_role" "vpc_flow_log_cloudwatch" {
   name_prefix        = "vpc-flow-log-role-"
   assume_role_policy = data.aws_iam_policy_document.flow_log_cloudwatch_assume_role[0].json
 
-  tags = merge(var.tags, var.vpc_flow_log_tags)
 }
 
 data "aws_iam_policy_document" "flow_log_cloudwatch_assume_role" {
